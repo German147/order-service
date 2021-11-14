@@ -2,6 +2,9 @@ package com.barreragerman.orderservice.controler;
 
 import com.barreragerman.orderservice.entity.Order;
 import com.barreragerman.orderservice.service.OrderSrevice;
+import com.barreragerman.orderservice.utils.Payment;
+import com.barreragerman.orderservice.utils.TransactionRequest;
+import com.barreragerman.orderservice.utils.TransactionalResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,8 +19,11 @@ public class OrderController {
     private OrderSrevice orderSrevice;
 
     @PostMapping("/bookOrder")
-    public Order bookOrder(@RequestBody Order order){
-        return orderSrevice.saveOrder(order);
+    public TransactionalResponse  bookOrder(@RequestBody TransactionRequest request){
+
+        return orderSrevice.saveOrder(request);
     }
+
+
 
 }
